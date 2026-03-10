@@ -1,14 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitHub Issue Tracker</title>
+  <title> Login </title>
+
+  <!--DaisyUI+Tailwind-->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!--Font Awesome CDN-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"
+  />
+
+  <!--Font(Geist)-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+  <!--Applying Font-->
+  <style>
+    * {
+      font-family: "Geist", sans-serif;
+    }
+  </style>
+
 </head>
+
 <body>
-  <h1>GitHub Issue Tracker</h1>
+  <section class="shadow-sm mw-[520px] w-3/12 mx-auto rounded-md p-8 mt-40">
+    <div class="github-head text-center justify-center space-y-5">
+      <div class="github-logo flex justify-center">
+        <img src="assets/github-logo.png" alt="">
+      </div>
+      <div class="github-text">
+        <h2 class="font-semibold text-[#1F2937] text-xl">GitHub Issue Tracker</h2>
+        <p class="text-[#64748B]">Sign-In to manage your issues</p>
+      </div>
+    </div>
+
+    <!--login Form-->
+    <div class="fieldset mb-10">
+      <label class="label font-medium text-[#1F2937]">Username</label>
+      <input id="username-input" type="text" class="input w-full rounded-md" placeholder="Enter Username" />
+
+      <label class="label font-medium text-[#1F2937]">Password</label>
+      <input id="password-input" type="password" class="input w-full rounded-md" placeholder="Enter Password" />
+
+      <button id="sign-btn" class="btn btn-primary mt-4 rounded-md">Sign In</button>
+      <button id="sign-btn" class="btn mt-4 rounded-md">OR</button>
+    </div>
+
+    <!--Demo-->
+    <div class="text-center">
+      <p class="text-[#64748B] text-[12px]">Demo Credentials:</p>
+      <div class="bg-[#F8FAFC] p-5 rounded-md">
+        <p><span class="font-bold">Username:</span> admin</p>
+        <p><span class="font-bold">Password:</span> admin123</p>
+      </div>
+    </div>
+  </section>
 
 
   <script src="./scripts/main.js"></script>
 </body>
+
 </html>
