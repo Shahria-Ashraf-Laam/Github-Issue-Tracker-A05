@@ -1,9 +1,6 @@
-// console.log("Hello from homepgae!");
-
+// console.log("Hello! This is home page")
 let activeTab = "all"
 let issuesData = [];
-
-const api = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
 
 //Spinner
@@ -17,6 +14,8 @@ const manageSpinner = (status) => {
   }
 }
 
+const api = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+
 manageSpinner(true);
 fetch(api)
   .then(res => res.json())
@@ -26,12 +25,21 @@ fetch(api)
     manageSpinner(false);
   })
 
-//Spinner end
+//Modal
+const loadIssueDetail = async (id) => {
+  manageSpinner(true);
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
+  const res = await fetch(url);
+  const details = await res.json();
+  displayIssueDetails(details.data)
+  manageSpinner(false);
+}
+
+//Spinner End
 
 
 const displayIssueDetails = (issue) => {
 
-  // console.log(issue);
   const detailsBox = document.getElementById("details-container");
   detailsBox.innerHTML = `
                     <div>
@@ -55,6 +63,7 @@ const displayIssueDetails = (issue) => {
             <p>Priority: <button class="btn btn-soft rounded-full">${issue.priority.charAt(0).toUpperCase() + issue.priority.slice(1)}</button></p>
         </div>
     `;
+  document.getElementById("issue_modal").showModal();
 };
 
 
@@ -64,7 +73,7 @@ function showIssues(issues) {
   const issuesContainer = document.getElementById("issues-container");
   issuesContainer.innerHTML = "";
 
-  // Filter issue
+  //Filter issues
   let filteredIssues;
 
   if (activeTab === "all") {
@@ -78,19 +87,18 @@ function showIssues(issues) {
   const issueCount = document.getElementById("issue-count");
   issueCount.innerText = `${filteredIssues.length} Issues`;
 
-  for (let issue of issues) {
-    // console.log(issue)
+  for (let issue of filteredIssues) {
     const statusImg = issue.status === "open"
       ? "assets/Open-Status.png"
       : "assets/Closed-Status.png";
 
     const issueCard = document.createElement("div");
 
-    // Adding border top dynamically
+    //Adding border top dynamically
     issueCard.style.borderTop = issue.status === "open" ? "4px solid #00A96E" : "4px solid #A855F7";
     issueCard.style.borderRadius = "0.5rem";
 
-    // Adding labels dynamically
+    //Adding labels dynamically
     const labelAdd = issue.labels.map(label => `
                 <button class="btn btn-soft btn-secondary rounded-full border">${label.toUpperCase()}</button>
             `).join(" ")
@@ -133,8 +141,7 @@ function showIssues(issues) {
   }
 }
 
-
-// Tab-buttons
+//Tab Buttons
 const tabButtons = document.querySelectorAll(".issue-tab-btn");
 tabButtons.forEach(btn => {
   btn.addEventListener("click", async () => {
@@ -148,12 +155,16 @@ tabButtons.forEach(btn => {
     btn.classList.remove("btn-outline");
     btn.classList.add("btn-primary");
 
+    manageSpinner(true);
+    await new Promise(resolve => setTimeout(resolve, 0));
+
     if (activeTab === "all") {
       showIssues(issuesData);
     } else {
       const filtered = issuesData.filter(issue => issue.status === activeTab);
       showIssues(filtered);
     }
+    manageSpinner(false);
   })
 })
 
@@ -170,6 +181,5 @@ document.getElementById("btn-search").addEventListener("click", async () => {
     issue.title.toLowerCase().includes(searchValue) ||
     issue.description.toLowerCase().includes(searchValue)
   );
-
   showIssues(filtered);
 });

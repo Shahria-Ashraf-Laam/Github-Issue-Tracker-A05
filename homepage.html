@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Login </title>
+  <title>GitHub | Home</title>
 
   <!--DaisyUI+Tailwind-->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
@@ -95,6 +95,30 @@
 
       </div>
     </section>
+
+
+    <!--Spinner -->
+    <section id="spinner" class="flex justify-center items-center py-10 w-9/12 mx-auto bg-white rounded-lg hidden">
+      <span class="loading loading-dots loading-xl"></span>
+    </section>
+
+    <!--Modal -->
+    <dialog id="issue_modal" class="modal">
+      <div class="modal-box">
+
+        <div id="details-container" class=" p-3 space-y-3">
+
+        </div>
+
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn btn-primary">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
 
   </main>
 
